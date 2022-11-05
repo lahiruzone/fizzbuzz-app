@@ -1,17 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fizzbuzz_app/features/fizzbuzz/domain/entities/fizzbuzz_repository_result.dart';
-import 'package:fizzbuzz_app/features/fizzbuzz/domain/repositories/fizzbuzz_repository.dart';
+import 'package:fizzbuzz_app/features/fizzbuzz/domain/usecases/get_fizzbuzz_list.dart';
 import 'package:meta/meta.dart';
 
 part 'fizzbuzz_event.dart';
 part 'fizzbuzz_state.dart';
 
 class FizzbuzzBloc extends Bloc<FizzbuzzEvent, FizzbuzzState> {
-  final FizzbuzzRepository fizzbuzzRepository;
+  final GetFizzBuzzList getFizzBuzzList;
 
   FizzbuzzBloc({
-    required this.fizzbuzzRepository,
+    required this.getFizzBuzzList,
   }) : super(const FizzbuzzState()) {
     on<FizzbuzzLoaded>(_mapFizzbuzzLoadedToState);
     on<FizzbuzzLimitChanged>(_mapFizzbuzzLimitChangedToState);
@@ -22,7 +22,7 @@ class FizzbuzzBloc extends Bloc<FizzbuzzEvent, FizzbuzzState> {
       limit: event.limit,
       status: FizzbuzzStatus.loading,
     ));
-    final result = await fizzbuzzRepository.getFizzBuzzList(state.limit);
+    final result = await getFizzBuzzList.execute(state.limit);
     if (result.error != null) {
       emit(state.copyWith(status: FizzbuzzStatus.failure, fizzbuzzRepositoryResult: result));
     } else {
@@ -35,7 +35,7 @@ class FizzbuzzBloc extends Bloc<FizzbuzzEvent, FizzbuzzState> {
       limit: event.limit,
       status: FizzbuzzStatus.loading,
     ));
-    final result = await fizzbuzzRepository.getFizzBuzzList(event.limit);
+    final result = await getFizzBuzzList.execute(event.limit);
     if (result.error != null) {
       emit(state.copyWith(status: FizzbuzzStatus.failure, fizzbuzzRepositoryResult: result));
     } else {

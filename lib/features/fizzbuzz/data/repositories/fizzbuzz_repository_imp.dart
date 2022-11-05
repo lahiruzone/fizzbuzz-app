@@ -14,8 +14,8 @@ class FizzbuzzRepositoryImp extends FizzbuzzRepository {
       final result = await fizzbuzzLocalDataSource.getFizzBuzzResult(limit);
       return result;
     } catch (e) {
-      return FizzbuzzRepositoryResult(
-          error: const ApplicationError(code: '500', message: 'Something wen\'t wrong. Please try again'));
+      return const FizzbuzzRepositoryResult(
+          error: ApplicationError(code: '500', message: 'Something wen\'t wrong. Please try again'));
     }
   }
 }

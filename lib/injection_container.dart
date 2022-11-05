@@ -1,5 +1,6 @@
 import 'package:fizzbuzz_app/features/fizzbuzz/data/datasources/fizzbuzz_local_datasource.dart';
 import 'package:fizzbuzz_app/features/fizzbuzz/data/repositories/fizzbuzz_repository_imp.dart';
+import 'package:fizzbuzz_app/features/fizzbuzz/domain/usecases/get_fizzbuzz_list.dart';
 import 'package:fizzbuzz_app/features/fizzbuzz/presantation/bloc/fizzbuzz_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -10,10 +11,13 @@ final sl = GetIt.instance;
 
 void init() {
   //Bloc
-  sl.registerFactory(() => FizzbuzzBloc(fizzbuzzRepository: sl.call()));
+  sl.registerFactory(() => FizzbuzzBloc(getFizzBuzzList: sl.call()));
 
   //Repositories
   sl.registerLazySingleton<FizzbuzzRepository>(() => FizzbuzzRepositoryImp(fizzbuzzLocalDataSource: sl.call()));
+
+  //Usecases
+  sl.registerLazySingleton(() => GetFizzBuzzList(fizzbuzzRepository: sl.call()));
 
   // Datasources
   sl.registerLazySingleton<FizzbuzzLocalDataSource>(() => FizzbuzzLocalDataSourceImp());
