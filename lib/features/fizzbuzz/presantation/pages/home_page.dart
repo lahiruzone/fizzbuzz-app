@@ -19,35 +19,30 @@ class HomePage extends StatelessWidget {
         title: const Text('FizzBuzz'),
       ),
       body: BlocProvider(
-        create: (context) => sl<FizzbuzzBloc>()
-          ..add(
-            const FizzbuzzLoaded(defaultFizzBuzzRange),
-          ),
-        child: Stack(
-          children: [
-            BlocBuilder<FizzbuzzBloc, FizzbuzzState>(
-              buildWhen: (previous, current) => previous.status != current.status,
-              builder: (_, state) {
-                if (state.status == FizzbuzzStatus.loading) {
-                  return const LoadingIndicatorWidget();
-                } else if (state.status == FizzbuzzStatus.failure) {
-                  return HomePageErrorWidget(message: state.fizzbuzzRepositoryResult!.error!.message);
-                } else if (state.status == FizzbuzzStatus.success) {
-                  return ListView.builder(
-                      itemCount: state.fizzbuzzRepositoryResult!.fizzbuzzList!.length,
-                      itemBuilder: ((context, index) => Card(
-                            child: ListTile(
-                              title: Text(state.fizzbuzzRepositoryResult!.fizzbuzzList![index].text),
-                            ),
-                          )));
-                } else {
-                  return const HomePageWelcomeWidget();
-                }
-              },
-            )
-          ],
-        ),
-      ),
+          create: (context) => sl<FizzbuzzBloc>()
+            ..add(
+              const FizzbuzzLoaded(defaultFizzBuzzRange),
+            ),
+          child: BlocBuilder<FizzbuzzBloc, FizzbuzzState>(
+            buildWhen: (previous, current) => previous.status != current.status,
+            builder: (_, state) {
+              if (state.status == FizzbuzzStatus.loading) {
+                return const LoadingIndicatorWidget();
+              } else if (state.status == FizzbuzzStatus.failure) {
+                return HomePageErrorWidget(message: state.fizzbuzzRepositoryResult!.error!.message);
+              } else if (state.status == FizzbuzzStatus.success) {
+                return ListView.builder(
+                    itemCount: state.fizzbuzzRepositoryResult!.fizzbuzzList!.length,
+                    itemBuilder: ((context, index) => Card(
+                          child: ListTile(
+                            title: Text(state.fizzbuzzRepositoryResult!.fizzbuzzList![index].text),
+                          ),
+                        )));
+              } else {
+                return const HomePageWelcomeWidget();
+              }
+            },
+          )),
     );
   }
 }
