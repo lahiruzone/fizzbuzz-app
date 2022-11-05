@@ -7,6 +7,10 @@ class GetFizzBuzzList {
   GetFizzBuzzList({required this.fizzbuzzRepository});
 
   Future<FizzbuzzRepositoryResult> execute(int limit) async {
-    return await fizzbuzzRepository.getFizzBuzzList(limit);
+    try {
+      return await fizzbuzzRepository.getFizzBuzzList(limit);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
