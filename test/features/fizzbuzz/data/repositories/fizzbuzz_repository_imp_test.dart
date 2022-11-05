@@ -29,7 +29,7 @@ void main() {
     fizzbuzzRepository = FizzbuzzRepositoryImp(fizzbuzzLocalDataSource: mockFizzbuzzLocalDataSource);
   });
 
-  group('fizzbuzz repository', () {
+  group('fizzbuzzRepository', () {
     test('should get fizzbuzz list for the limit from the local data source', () async {
       //arrange
       when(() => mockFizzbuzzLocalDataSource.getFizzBuzzResult(tLimit))

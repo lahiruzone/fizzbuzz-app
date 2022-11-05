@@ -29,16 +29,18 @@ void main() {
     fizzbuzzList: tFizzbuzzList,
   );
 
-  test('should get fizzbuzz list for the limit from the repository', () async {
-    //arrange
-    when(
-      () => mockFizzBuzzListRepository.getFizzBuzzList(tLimit),
-    ).thenAnswer((realInvocation) async => tFizzbuzzRepositoryResult);
-    //act
-    final result = await usecase.execute(tLimit);
-    //assert
-    expect(result, tFizzbuzzRepositoryResult);
-    verify(() => mockFizzBuzzListRepository.getFizzBuzzList(tLimit));
-    verifyNoMoreInteractions(mockFizzBuzzListRepository);
+  group('getFizzBuzzList', () {
+    test('should get fizzbuzz list for the limit from the repository', () async {
+      //arrange
+      when(
+        () => mockFizzBuzzListRepository.getFizzBuzzList(tLimit),
+      ).thenAnswer((realInvocation) async => tFizzbuzzRepositoryResult);
+      //act
+      final result = await usecase.execute(tLimit);
+      //assert
+      expect(result, tFizzbuzzRepositoryResult);
+      verify(() => mockFizzBuzzListRepository.getFizzBuzzList(tLimit));
+      verifyNoMoreInteractions(mockFizzBuzzListRepository);
+    });
   });
 }
