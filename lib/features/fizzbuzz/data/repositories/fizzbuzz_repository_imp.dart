@@ -1,3 +1,4 @@
+import 'package:fizzbuzz_app/config.dart';
 import 'package:fizzbuzz_app/core/entities/app_error.dart';
 import 'package:fizzbuzz_app/features/fizzbuzz/data/datasources/fizzbuzz_local_datasource.dart';
 import 'package:fizzbuzz_app/features/fizzbuzz/domain/entities/fizzbuzz_repository_result.dart';
@@ -14,8 +15,7 @@ class FizzbuzzRepositoryImp extends FizzbuzzRepository {
       final result = await fizzbuzzLocalDataSource.getFizzBuzzResult(limit);
       return result;
     } catch (e) {
-      return const FizzbuzzRepositoryResult(
-          error: ApplicationError(code: '500', message: 'Something wen\'t wrong. Please try again'));
+      return const FizzbuzzRepositoryResult(error: ApplicationError(message: defaultErrorMessage));
     }
   }
 }

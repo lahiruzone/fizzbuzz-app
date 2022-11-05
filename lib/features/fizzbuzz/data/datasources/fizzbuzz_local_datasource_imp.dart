@@ -16,7 +16,7 @@ class FizzbuzzLocalDataSourceImp extends FizzbuzzLocalDataSource {
       );
       return FizzbuzzRepositoryResult(fizzbuzzList: result);
     } catch (error) {
-      rethrow;
+      throw Exception();
     }
   }
 }
