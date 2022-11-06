@@ -1,3 +1,4 @@
+import 'package:fizzbuzz_app/config.dart';
 import 'package:fizzbuzz_app/core/entities/app_error.dart';
 import 'package:fizzbuzz_app/core/util/input_converter.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +22,8 @@ void main() {
 
     test('should return an error when the string is not a integer', () {
       //arrange
-      InputConverterResult fizzbuzz = const InputConverterResult(error: ApplicationError(message: 'Invalied input'));
+      InputConverterResult fizzbuzz =
+          const InputConverterResult(error: ApplicationError(message: invaliedInputMessage));
       //act
       final result = inputConverter.stringtoUnsignedInteger('ABC');
       //assert
@@ -30,7 +32,8 @@ void main() {
 
     test('should return an error when the string is a negetive integer', () {
       //arrange
-      InputConverterResult fizzbuzz = const InputConverterResult(error: ApplicationError(message: 'Invalied input'));
+      InputConverterResult fizzbuzz =
+          const InputConverterResult(error: ApplicationError(message: invaliedInputMessage));
       //act
       final result = inputConverter.stringtoUnsignedInteger('-123');
       //assert

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fizzbuzz_app/config.dart';
 import 'package:fizzbuzz_app/core/entities/app_error.dart';
 
 class InputConverter {
@@ -8,7 +9,7 @@ class InputConverter {
       if (integer < 0) throw const FormatException();
       return InputConverterResult(value: integer);
     } on FormatException {
-      return const InputConverterResult(error: ApplicationError(message: 'Invalied input'));
+      return const InputConverterResult(error: ApplicationError(message: invaliedInputMessage));
     }
   }
 }

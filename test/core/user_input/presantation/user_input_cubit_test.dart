@@ -34,13 +34,13 @@ void main() {
     blocTest('emits [invalied] for invalied input',
         build: () {
           when(() => mockInputConverter.stringtoUnsignedInteger('ABC')).thenAnswer(
-              (invocation) => const InputConverterResult(error: ApplicationError(message: invaliedInpuMessage)));
+              (invocation) => const InputConverterResult(error: ApplicationError(message: invaliedInputMessage)));
           return userInputCubit;
         },
         act: (cubit) => cubit.limitChanged('ABC'),
         expect: () => [
               const UserInputState(
-                  status: FormStatus.invalied, applicationError: ApplicationError(message: invaliedInpuMessage))
+                  status: FormStatus.invalied, applicationError: ApplicationError(message: invaliedInputMessage))
             ]);
   });
 }
