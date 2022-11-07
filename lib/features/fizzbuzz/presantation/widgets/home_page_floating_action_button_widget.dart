@@ -38,20 +38,22 @@ class HomePageFloatingActionButtonWidget extends StatelessWidget {
               builder: (context, state) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      HomePageUserInputTextFeild(
-                        errorText: (state.status == FormStatus.invalied) ? state.applicationError!.message : null,
-                      ),
-                      HomePageGenarateButton(
-                        visibility: state.status == FormStatus.valied,
-                        onPressed: () => context.read<UserInputCubit>().onTap(onTap: () {
-                          Navigator.pop(context);
-                          fizzbuzzContext.read<FizzbuzzBloc>().add(FizzbuzzLimitChanged(state.limit!));
-                        }),
-                      ),
-                    ],
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        HomePageUserInputTextFeild(
+                          errorText: (state.status == FormStatus.invalied) ? state.applicationError!.message : null,
+                        ),
+                        HomePageGenarateButton(
+                          visibility: state.status == FormStatus.valied,
+                          onPressed: () => context.read<UserInputCubit>().onTap(onTap: () {
+                            Navigator.pop(context);
+                            fizzbuzzContext.read<FizzbuzzBloc>().add(FizzbuzzLimitChanged(state.limit!));
+                          }),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

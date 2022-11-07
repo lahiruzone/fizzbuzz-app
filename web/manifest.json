@@ -1,6 +1,6 @@
 {
-    "name": "fizzbuzz_app",
-    "short_name": "fizzbuzz_app",
+    "name": "Fizzbuzz App",
+    "short_name": "Fizzbuzz App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
