@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fizzbuzz.app.fizzbuzz_app">
    <application
-        android:label="fizzbuzz_app"
+        android:label="FizzBuzz App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
