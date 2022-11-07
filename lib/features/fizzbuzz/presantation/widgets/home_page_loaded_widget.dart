@@ -10,11 +10,18 @@ class HomePageLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        itemCount: fizzbuzzList.length,
-        itemBuilder: ((context, index) => ListTile(
-              title: Text(fizzbuzzList[index].text),
-            )));
+    ScrollController scollBarController = ScrollController();
+    return Scrollbar(
+      controller: scollBarController,
+      thumbVisibility: true,
+      child: ListView.separated(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          controller: scollBarController,
+          separatorBuilder: (BuildContext context, int index) => const Divider(),
+          itemCount: fizzbuzzList.length,
+          itemBuilder: ((context, index) => ListTile(
+                title: Text(fizzbuzzList[index].text),
+              ))),
+    );
   }
 }
