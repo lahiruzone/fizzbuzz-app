@@ -1,4 +1,5 @@
 import 'package:fizzbuzz_app/features/fizzbuzz/presantation/widgets/home_page_body_widget.dart';
+import 'package:fizzbuzz_app/features/fizzbuzz/presantation/widgets/home_page_theme_toggle_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fizzbuzz_app/config.dart';
@@ -21,6 +22,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const HomePageFizzbuzzLimitDisplayTextWidget(),
+          actions: const [HomePageThemeToggleButtonWidget()],
         ),
         floatingActionButton: const HomePageFloatingActionButtonWidget(),
         body: const HomePageBodyWidget(),
