@@ -12,6 +12,7 @@ class HomePageThemeToggleButtonWidget extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Switch(value: state.darkMode, onChanged: (val) => context.read<ThemeCubit>().toggleTheme()),
             Icon(state.darkMode ? Icons.nightlight_round : Icons.sunny),

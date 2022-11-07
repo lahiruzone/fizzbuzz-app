@@ -11,7 +11,10 @@ class HomePageFizzbuzzLimitDisplayTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FizzbuzzBloc, FizzbuzzState>(
       builder: (context, state) {
-        return Text('FizzBuzz (Limit: ${state.limit})');
+        return Text(
+          'FizzBuzz (Limit: ${state.limit})',
+          textAlign: TextAlign.center,
+        );
       },
     );
   }
