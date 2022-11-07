@@ -13,12 +13,14 @@ class HomePageWideSesstingsSectionWidget extends StatelessWidget {
     return Flexible(
       flex: 1,
       fit: FlexFit.tight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: HomePageFizzbuzzLimitDisplayTextWidget(),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: HomePageFizzbuzzLimitDisplayTextWidget(),
+            ),
           ),
           Divider(),
           HomePageThemeToggleButtonWidget(),

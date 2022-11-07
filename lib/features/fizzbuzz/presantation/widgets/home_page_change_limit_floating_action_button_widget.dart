@@ -1,4 +1,3 @@
-import 'package:fizzbuzz_app/features/fizzbuzz/presantation/widgets/home_page_genarate_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fizzbuzz_app/core/user_input/presantation/cubit/user_input_cubit.dart';
@@ -6,8 +5,8 @@ import 'package:fizzbuzz_app/features/fizzbuzz/presantation/bloc/fizzbuzz_bloc.d
 import 'package:fizzbuzz_app/features/fizzbuzz/presantation/widgets/home_page_user_input_text_feild.dart';
 import 'package:fizzbuzz_app/injection_container.dart';
 
-class HomePageFloatingActionButtonWidget extends StatelessWidget {
-  const HomePageFloatingActionButtonWidget({super.key});
+class HomePageChangeLimitFloatingActionButtonWidget extends StatelessWidget {
+  const HomePageChangeLimitFloatingActionButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +22,12 @@ class HomePageFloatingActionButtonWidget extends StatelessWidget {
   }
 
   _showButtomSheet(BuildContext fizzbuzzContext) {
-    showModalBottomSheet(
+    showDialog(
       context: fizzbuzzContext,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
-      ),
       builder: (_) {
-        return Padding(
-          padding: MediaQuery.of(fizzbuzzContext).viewInsets,
-          child: BlocProvider(
+        return AlertDialog(
+          title: const Text('Enter a limit'),
+          content: BlocProvider(
             create: (context) => sl<UserInputCubit>(),
             child: BlocBuilder<UserInputCubit, UserInputState>(
               builder: (context, state) {
@@ -45,12 +40,17 @@ class HomePageFloatingActionButtonWidget extends StatelessWidget {
                         HomePageUserInputTextFeild(
                           errorText: (state.status == FormStatus.invalied) ? state.applicationError!.message : null,
                         ),
-                        HomePageGenarateButton(
-                          visibility: state.status == FormStatus.valied,
-                          onPressed: () => context.read<UserInputCubit>().onTap(onTap: () {
-                            Navigator.pop(context);
-                            fizzbuzzContext.read<FizzbuzzBloc>().add(FizzbuzzLimitChanged(state.limit!));
-                          }),
+                        Visibility(
+                          visible: state.status == FormStatus.valied,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                                onPressed: () => context.read<UserInputCubit>().onTap(onTap: () {
+                                      Navigator.pop(context);
+                                      fizzbuzzContext.read<FizzbuzzBloc>().add(FizzbuzzLimitChanged(state.limit!));
+                                    }),
+                                child: const Text('GENARATE')),
+                          ),
                         ),
                       ],
                     ),
