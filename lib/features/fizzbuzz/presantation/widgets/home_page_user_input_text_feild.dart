@@ -13,7 +13,7 @@ class HomePageUserInputTextFeild extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (value) => context.read<UserInputCubit>().limitChanged(value),
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'limit',
         border: const OutlineInputBorder(),
